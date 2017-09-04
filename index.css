@@ -1,0 +1,41 @@
+.fa-plus-square{
+    width: 20px;
+    height: 20px;
+}
+body{
+    background-color: #232323;
+
+}
+#newCont{
+    display: none;
+}
+ul{
+    background-color: #cbcbcb;
+    width: 80%;
+    border: solid 2px #ff0003;
+    border-radius:3px ;
+    margin:3px;
+
+}
+li{
+    list-style-type: none;
+    display: inline-block;
+    padding: 5px;
+    color: #440003;
+
+}
+button{
+    padding: 3px 10px 3px 10px;
+    background-color: #000000;
+    color: aliceblue;
+    border: solid 2px #ff0003;
+    border-radius:3px;
+}
+input{
+    border: solid 3px #ee0003;
+    border-radius:3px;
+}
+#newPhone{
+    margin-left: 390px;
+    display:none;
+}
