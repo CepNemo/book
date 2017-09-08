@@ -4,6 +4,7 @@
 
 let doc = window.document;
 
+
 ;(function() {
     let addPhoneInput = doc.getElementById('addPhoneInput');
     let addNewTel = doc.getElementById('addNewTel');
@@ -22,16 +23,16 @@ let doc = window.document;
 
 
     // вивод полей ввола
-    let addCont = function (){
-            createCont.style.display = 'block';
-            search.style.display = 'none';
-            tdList.style.display = 'none';
+    let addCont = function () {
+        createCont.style.display = 'block';
+        search.style.display = 'none';
+        tdList.style.display = 'none';
     };
     // возрат поля поиска
-    let cancel1 = function(){
-            createCont.style.display = 'none';
-            search.style.display = 'block';
-            tdList.style.display = 'block';
+    let cancel1 = function () {
+        createCont.style.display = 'none';
+        search.style.display = 'block';
+        tdList.style.display = 'block';
     };
 
 
@@ -40,6 +41,7 @@ let doc = window.document;
         let arrKey = "";
         let str = "";
         arrKey = localStorage.key(o);
+
         let div = document.createElement("div");
         div.className = localStorage.key(o);
         tdList.appendChild(div);
@@ -52,83 +54,108 @@ let doc = window.document;
         "<ul><li>" + "<i>Имя:</i>" + " " + narry[0] + "</li>" + " " +
         "<li>" + "<i>E-mail:</i>" + " " + narry[1] + "</li>" + " " +
         "<li>" + "<i>Телефон:</i>" + " " + narry[2] + "</li>" +
-        "<li><button id = 'delete' onclick = dell(" + arrKey + ")>Delele</button>"+
-        "<button id ='edit' value=("+ arrKey +")>Edit</button></li></ul>");
+        "<li><button id = 'delete' onclick = dell(" + arrKey + ")>Delele</button>" +
+        "<button id ='edit' onclick =edit(" + arrKey + ")>Edit</button></li></ul>");
 
     }
 
-    //запись даних
+    //запись даних валидация
 
-    let addData = function() {
+    let addData = function () {
 
         let name = doc.getElementById('name');
         let mail = doc.getElementById('mail');
         let tel = doc.getElementById('phone');
         let mail2 = doc.getElementsByClassName('mail');
-        alert(mail2.length);
+        //alert(mail2.length);
 
         let idDate = {
             time: new Date().getTime()
         };
         let idDate1 = [idDate['time']];
+
         let allInfo = {
             name: name.value,
+            tel: tel.value,
             mail: mail.value,
-            mail2:mail2.value,
-            tel: tel.value
-        };
-        let allinfo1 = [allInfo['name'],
-            allInfo['mail'],
-            allInfo['mail2'],
-            allInfo['tel']];
+            mail2: mail2.value
 
+        };
+        let allinfo1 = [
+            allInfo['name'],
+            allInfo['tel'],
+            allInfo['mail'],
+            allInfo['mail2']];
 
         if (allinfo1[0] == "") {
-            return alert('Заполните поля');
+            alert('Введите имя');
         }
 
-        if (allinfo1[0] !== "") {
-            alert('Контакт добавлен');
-            localStorage.setItem(JSON.stringify(idDate1), JSON.stringify(allinfo1));
-
+        if (allinfo1[0] != "") {
+            if (allInfo.tel != "") {
+                alert('Контакт добавлен');
+                localStorage.setItem(JSON.stringify(idDate1), JSON.stringify(allinfo1));
+                window.location.reload();
+            }
+            else {
+                alert("Введите номер");
+            }
         }
-
     };
 
-   let addNewPhone = function(){
+    let addNewPhone = function () {
 
         let div2 = document.createElement('div');
-       div2.className = 'tel';
-       div2.innerHTML =("<div><input type='number' placeholder='Number'></div>");
-       addPhoneInput.appendChild(div2);
+        div2.className = 'tel';
+        div2.innerHTML = ("<div><input type='number' placeholder='Number'></div>");
+        addPhoneInput.appendChild(div2);
     };
 
-    let addNewMail = function(){
+    let addNewMail = function () {
         let div3 = document.createElement('div');
         div3.className = 'mail';
-        div3.innerHTML =("<div><input type='email' placeholder='E-mail'></div>");
+        div3.innerHTML = ("<div><input type='email' placeholder='E-mail'></div>");
         newMailInput.appendChild(div3);
     };
-/*
-    let red = function () {
-       // let strI = "";
-       // let arrI =  "";
-        //strI = JSON.parse(localStorage.getItem(localStorage.key(a)));
-        //let arrI = strI.split(',');
-        alert ("aaaaaaaaaaaaa");
-    };*/
+
 
          cancel.addEventListener('click',cancel1);
            save.addEventListener('click', addData);
      addContact.addEventListener('click', addCont);
       addNewTel.addEventListener('click',addNewPhone);
     addNewEmail.addEventListener('click',addNewMail);
-     //   redData.addEventListener('click',red);
-
-
 
 })();
+/*let d,strI;
 
+ function edit(a) {
+
+     let div4 = document.createElement("div");
+         d = a;
+         strI = JSON.parse(localStorage.getItem("["+d+"]"));
+     let  arry1  = strI[0];
+    for(let s = 0; s < arry1.length; s++) {
+
+        //div4.className = localStorage.key("["+d+"]");
+        tdList.appendChild(div4);
+
+
+        //console.log(narry);
+
+        div4.innerHTML = (
+          "<ul>" + "<i>Имя:</i>" + " <input value='" +strI[0] + "'></li>" + " " +
+          "<li>" + "<i>E-mail:</i>" + " <input value='" + strI[2] + "'></li>" + " " +
+          "<li>" + "<i>Телефон:</i>" + "<input value='" + strI[1] + "'></li>" +
+         "</ul>"+"<button id='save2' onclick='sav()'>Save</button>");
+    }
+};
+function sav(){
+    if(strI !== undefined){
+        localStorage.setItem(JSON.stringify(d), JSON.stringify(strI));
+    }
+}
+/!*function save2()  {
+    localStorage.setItem(JSON.stringify(d), JSON.stringify(strI));}*!/*/
 
 function dell(a) {
     let q = a;
